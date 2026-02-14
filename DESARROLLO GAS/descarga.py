@@ -223,13 +223,16 @@ def descarga(completable1, numero_bot):
                 mostrartodo = driver.find_element(By.XPATH,xpath_mostrartodo)
                 time.sleep(3)
                 mostrartodo.click()
-                numero_factura_xpath = '/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[2]/mdt-table-cell/mdt-text-cell/span'
+                #numero_factura_xpath = '/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[2]/mdt-table-cell/mdt-text-cell/span'
+                numero_factura_xpath =  '/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[1]/mdt-table-cell/mdt-text-cell/span'
                 WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH,numero_factura_xpath)))
+               
                 numero_factura = driver.find_element(By.XPATH,numero_factura_xpath).text
-                periodo_xpath ='/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[3]'
+                #periodo_xpath ='/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[3]'
+                periodo_xpath ='/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[2]'
                 periodo = driver.find_element(By.XPATH,periodo_xpath).text
                 print(periodo)
-                importe_xpath ='/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[4]/mdt-table-cell/mdt-text-cell/span'
+                importe_xpath ='/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[3]/mdt-table-cell/mdt-text-cell/span'
                 importe = driver.find_element(By.XPATH,importe_xpath).text
                 #print(importe)
                 len(periodo)
@@ -238,10 +241,12 @@ def descarga(completable1, numero_bot):
                 num_periodo = completable1
                 print('periodo '+ str(num_periodo))
                 if numero_periodo == num_periodo:
-                    credito_xpath = "/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[7]/mdt-table-cell/mdt-text-cell/span"
+                    #credito_xpath = "/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[6]/mdt-table-cell/mdt-text-cell/span"
+                    credito_xpath = "/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[6]"
                     credito = driver.find_element(By.XPATH,credito_xpath).text
                     if credito !="CREDITO":
-                        xpath_descargaFactura = "/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[9]/mdt-table-cell/ld-options-cell/div/sdl-button-loadding/button/span/img"
+                        #xpath_descargaFactura = "/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[9]/mdt-table-cell/ld-options-cell/div/sdl-button-loadding/button/span/img"
+                        xpath_descargaFactura = "/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[7]/mdt-table-cell/ld-options-cell/div/sdl-button-loadding/button/span/img"                             
                         descargaFactura = driver.find_element(By.XPATH,xpath_descargaFactura)
                         time.sleep(2)
                         descargaFactura.click()

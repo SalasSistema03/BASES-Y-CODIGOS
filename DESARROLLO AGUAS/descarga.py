@@ -289,15 +289,15 @@ def descarga(numero_bot):
             comprobante.click()
             time.sleep(6)
             idFechaUno="span_W0024W0007vCOMPFECHAVTO_00010001"
-            WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.ID,idFechaUno)))
+            WebDriverWait(driver, 60).until(EC.presence_of_all_elements_located((By.ID,idFechaUno)))
             fechaUno = driver.find_element(By. ID, idFechaUno)
             fechaUnoText = fechaUno.text[3:5]
             idFechaDos="span_W0024W0007vCOMPFECHAVTO_00020001"
-            WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.ID,idFechaDos)))
+            WebDriverWait(driver, 60).until(EC.presence_of_all_elements_located((By.ID,idFechaDos)))
             fechaDos = driver.find_element(By. ID, idFechaDos)
             fechaDosText = fechaDos.text[3:5]
             idFechaTres="span_W0024W0007vCOMPFECHAVTO_00030001"
-            WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.ID,idFechaTres)))
+            WebDriverWait(driver, 60).until(EC.presence_of_all_elements_located((By.ID,idFechaTres)))
             fechaTres = driver.find_element(By. ID, idFechaTres)
             fechaTresText = fechaTres.text[3:5]
 
@@ -318,9 +318,9 @@ def descarga(numero_bot):
                 else:
                     print("error")
             
-            WebDriverWait(driver, 30).until(EC.presence_of_all_elements_located((By.ID,idDescarga)))
+            WebDriverWait(driver, 60).until(EC.presence_of_all_elements_located((By.ID,idDescarga)))
             descargaPdf = driver.find_element(By.ID,idDescarga)
-            time.sleep(1)
+            time.sleep(4)
             descargaPdf.click()
             time.sleep(30)
             pyautogui.hotkey('ctrl', 's')
@@ -332,7 +332,7 @@ def descarga(numero_bot):
             
             ubicacionDescargado = ubicacion + "DESCARGA/"
             print(ubicacionDescargado)
-            pyautogui.typewrite(ubicacionDescargado.replace("/", "\\") + "\\" + suministro)
+            pyautogui.typewrite(ubicacionDescargado.replace("/", "\\") + suministro)
             time.sleep(3)
             pyautogui.press('enter')
             time.sleep(1)

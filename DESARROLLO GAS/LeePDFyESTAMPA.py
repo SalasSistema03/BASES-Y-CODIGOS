@@ -330,5 +330,5 @@ def estampado(numero_bot):
                 pass
             print("PROCESO TERMINADO")
         pass
-numero_bot = "bot_04" 
-estampado(numero_bot)
+""" numero_bot = "bot_01" 
+estampado(numero_bot)  """  

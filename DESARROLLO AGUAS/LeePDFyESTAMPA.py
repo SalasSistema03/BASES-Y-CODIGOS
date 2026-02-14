@@ -206,15 +206,27 @@ def estampado (numero_bot):
                         t_factura = total + total2
                         total_factura = str(t_factura).zfill(10)
                     else:
-                        codi2 = Text1.index(dia+str(int(mes)+1).zfill(2)+año+"-")
-                        cod2 = Text1[codi2 -22: codi2 + 38]
-                        dia2 = cod2 [22:24]
-                        mes2 = cod2 [24:26]
-                        año2 = cod2 [26:28]
-                        fecha2 = dia2+"-"+mes2+"-"+año2
-                        monto2 = cod2 [29:39]
-                        total2 = int(monto2)
-                        mont2 = str(monto2).zfill(10)
+                        try:
+                            codi2 = Text1.index(dia+str(int(mes)+1).zfill(2)+año+"-")
+                            cod2 = Text1[codi2 -19: codi2 + 34]
+                            dia2 = cod2 [19:21]
+                            mes2 = cod2 [21:23]
+                            año2 = cod2 [23:25]
+                            fecha2 = dia2+"-"+mes2+"-"+año2
+                            monto2 = cod2 [26:36]
+                            total2 = int(monto2)
+                            mont2 = str(monto2).zfill(10)
+                        except:
+                            codi2 = Text1.index(dia+str(int(mes)+1).zfill(2)+año+"-")
+                            cod2 = Text1[codi2 -19: codi2 + 39]
+                            dia2 = cod2 [22:24]
+                            mes2 = cod2 [24:26]
+                            año2 = cod2 [26:28]
+                            fecha2 = dia2+"-"+mes2+"-"+año2
+                            monto2 = cod2 [29:39]
+                            total2 = int(monto2)
+                            mont2 = str(monto2).zfill(10)
+
                         #print("toma el valor mas")
                         t_factura = total+ total2
                         total_factura = str(t_factura).zfill(10)
