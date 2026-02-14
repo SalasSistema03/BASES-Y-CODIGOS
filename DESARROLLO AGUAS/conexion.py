@@ -33,8 +33,8 @@ def conectar():
     miConection.close()  # Cerramos la conexión
     
     # Mostrar los resultados
-    for fila in resultados:
-        print(fila) 
+    """ for fila in resultados:
+        print(fila)  """
     
     return(resultados)
 
