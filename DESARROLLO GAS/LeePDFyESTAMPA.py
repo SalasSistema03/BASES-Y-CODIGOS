@@ -226,7 +226,7 @@ def estampado(numero_bot):
                                 else:
                                     liq ="L" + liquidacion [liquidacion.index("de") -2 :  liquidacion.index("de")-1] + "/" + liquidacion [liquidacion.index("de") +3 :  liquidacion.index("de") + 4] 
                                     des = indiceDesde [:6] + indiceDesde [8:] 
-                                    hast = indiceHasta [:6] + indiceDesde [8:] 
+                                    hast = indiceHasta [:6] + indiceHasta [8:] 
                                     descripcion = "GASP " + des + " a " + hast + " " + liq
                                     largo = len(descripcion)
                                 if adm == "P":
@@ -330,5 +330,5 @@ def estampado(numero_bot):
                 pass
             print("PROCESO TERMINADO")
         pass
-""" numero_bot = "bot_01" 
-estampado(numero_bot)  """  
+numero_bot = "bot_03" 
+estampado(numero_bot)  
