@@ -198,6 +198,17 @@ def descarga(completable1, numero_bot):
             finalContrato = texto_contrato.index("/")
             barracontrato =texto_contrato[finalContrato+1: finalContrato+3]
             verificaContrato = texto_contrato[inicioContrato+2:finalContrato]+barracontrato
+            i = 1
+            while str(int(cliente)) != verificaContrato:
+                xpath_contrato = f"/html/body/app-root/div/sdl-menu/div/sdl-header/mat-toolbar/mat-toolbar-row/sdl-contratos/div/div[2]/ul/li[{i}]/div/div"
+                WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, xpath_contrato)))
+                seleccion_contrato = driver.find_element(By.XPATH,xpath_contrato)
+                texto_contrato = driver.find_element(By.XPATH,xpath_contrato).text
+                inicioContrato = texto_contrato.index(": ")
+                finalContrato = texto_contrato.index("/")
+                barracontrato =texto_contrato[finalContrato+1: finalContrato+3]
+                verificaContrato = texto_contrato[inicioContrato+2:finalContrato]+barracontrato
+                i += 1
             if str(int(cliente)) == verificaContrato:
                 seleccion_contrato.click()
                 time.sleep(5)
@@ -313,4 +324,4 @@ def descarga(completable1, numero_bot):
         driver.get('https://www.litoralgas.com.ar/ov/site/home')
     print('DONE')
 
-""" descarga("01") """
+descarga("03","bot_01")
