@@ -1,7 +1,7 @@
 def nombrebot():
-    nombre = "Bot_01"
+    #nombre = "Bot_01"
     #nombre = "Bot_02"
-    #nombre = "Bot_03"
+    nombre = "Bot_03"
     #nombre = "Bot_04"
     #nombre = "Bot_05"
     #nombre = "Bot_06"

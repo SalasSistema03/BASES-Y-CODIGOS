@@ -42,11 +42,27 @@ def descarga(completable1, numero_bot):
     gmail_6 = 'adm.impuestos.6@gmail.com'
     gmail_7 = 'adm.impuestos.7@gmail.com'
     variable_range = 0
+
+    def cierra_sesion():
+        xpath_muniequiro_usuario ="/html/body/app-root/div/sdl-menu/div/sdl-header/mat-toolbar/mat-toolbar-row/sdl-user/div/div/div[2]/div"
+        muniequiro_usuario =driver.find_element(By.XPATH,xpath_muniequiro_usuario)
+        muniequiro_usuario.click()
+        xpath_boton_salir = "/html/body/div[2]/div[2]/div/div/div/button[3]"
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH,xpath_boton_salir)))
+        boton_salir = driver.find_element(By.XPATH,xpath_muniequiro_usuario)
+        boton_salir.click()
+
     def cambio_cuenta (c_mail):
         try: 
+
+            time.sleep(2)
+            try:
+                cierra_sesion()
+            except:
+                pass
             driver.get(gas_principal)
             xpath_oficina = "/html/body/div[3]/div/section/div/div/div[1]/div/div/div/p[1]/a/img"
-            WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH,xpath_oficina)))   
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH,xpath_oficina)))   
             oficina = driver.find_element(By.XPATH,xpath_oficina)
             oficina.click()
             handles = driver.window_handles
@@ -200,6 +216,7 @@ def descarga(completable1, numero_bot):
             verificaContrato = texto_contrato[inicioContrato+2:finalContrato]+barracontrato
             i = 1
             while str(int(cliente)) != verificaContrato:
+                time.sleep(2)
                 xpath_contrato = f"/html/body/app-root/div/sdl-menu/div/sdl-header/mat-toolbar/mat-toolbar-row/sdl-contratos/div/div[2]/ul/li[{i}]/div/div"
                 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, xpath_contrato)))
                 seleccion_contrato = driver.find_element(By.XPATH,xpath_contrato)
@@ -324,4 +341,4 @@ def descarga(completable1, numero_bot):
         driver.get('https://www.litoralgas.com.ar/ov/site/home')
     print('DONE')
 
-descarga("03","bot_01")
+descarga("03","bot_03")
