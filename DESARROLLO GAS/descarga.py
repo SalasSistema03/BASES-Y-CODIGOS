@@ -47,10 +47,12 @@ def descarga(completable1, numero_bot):
         xpath_muniequiro_usuario ="/html/body/app-root/div/sdl-menu/div/sdl-header/mat-toolbar/mat-toolbar-row/sdl-user/div/div/div[2]/div"
         muniequiro_usuario =driver.find_element(By.XPATH,xpath_muniequiro_usuario)
         muniequiro_usuario.click()
+        time.sleep(5)
         xpath_boton_salir = "/html/body/div[2]/div[2]/div/div/div/button[3]"
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH,xpath_boton_salir)))
-        boton_salir = driver.find_element(By.XPATH,xpath_muniequiro_usuario)
+        boton_salir = driver.find_element(By.XPATH,xpath_boton_salir)
         boton_salir.click()
+        time.sleep(5)
 
     def cambio_cuenta (c_mail):
         try: 
@@ -341,4 +343,4 @@ def descarga(completable1, numero_bot):
         driver.get('https://www.litoralgas.com.ar/ov/site/home')
     print('DONE')
 
-descarga("03","bot_03")
+""" descarga("03","bot_03") """

@@ -148,5 +148,5 @@ completable1.grid(row=3, column=1, sticky= 'nsew')
 
 
 
-#ventana_principal.mainloop()
+ventana_principal.mainloop()
 
