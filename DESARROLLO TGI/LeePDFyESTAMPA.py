@@ -189,5 +189,5 @@ def estampado (numero_bot):
             print("PROCESO TERMINADO")
         pass
 
-""" numero_bot = "Bot_01"
-estampado (numero_bot) """
+numero_bot = "Bot_02"
+estampado (numero_bot) 

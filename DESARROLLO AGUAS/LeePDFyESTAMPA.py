@@ -167,6 +167,7 @@ def estampado (numero_bot):
         punto = servicio[2]
         adm = servicio[3]
         id_casa = servicio[4]
+        punto = str(int(punto))
         #SE DETERMINAN LAS VARIABLES PARA LA INTRODUCCION DEL CODIGO DE BARRAS
         inputfile = rute_agua + "DESCARGA/" + punto + ".pdf"
         #print(inputfile)
@@ -344,5 +345,5 @@ def estampado (numero_bot):
                 pass
             print("PROCESO TERMINADO")
         pass
-""" numero_bot = "Bot_01"
-estampado(numero_bot) """
+numero_bot = "Bot_02"
+estampado(numero_bot)  

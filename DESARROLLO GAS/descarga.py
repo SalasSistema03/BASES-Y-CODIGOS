@@ -10,6 +10,7 @@ from os import mkdir
 import shutil
 from os import remove
 from getpass import getuser
+import pyautogui
 
 #rute = 'C:/PROGRAMAS/'
 rute = '//10.10.10.171/Compartida/'
@@ -339,6 +340,7 @@ def descarga(completable1, numero_bot):
             with open(rute + 'IMPUESTOS/GAS/' + "NO ENCONTRADOS " + fecha + "_" + numero_bot + ".txt", "a") as file:
                 file.write(folio_no_encontrado)
         contador += 1
+        pyautogui.press('esc')
         print('Procesados ' + str(contador) + '/' + str(contador_total) + ' - Folio ' + str(folio))
         driver.get('https://www.litoralgas.com.ar/ov/site/home')
     print('DONE')
