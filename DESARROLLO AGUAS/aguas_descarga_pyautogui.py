@@ -1,4 +1,3 @@
-import pyautogui
 import time
 import pyperclip
 numero_bot = "02"
