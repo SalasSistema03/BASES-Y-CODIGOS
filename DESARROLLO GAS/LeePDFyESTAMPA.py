@@ -108,22 +108,27 @@ def estampado(numero_bot):
                             #print(diasLiq)
                             #print(contenido)
                             # Utilizamos una expresión regular para encontrar todas las ocurrencias de "R" en el texto
-                            patron = r' R '
+                            # Buscar fechas con formato DD/MM/YYYY seguidas de " R "
+                            patron = r'(\d{2}/\d{2}/\d{4})\s+R\s+\d+'
 
-                            # Buscar todas las coincidencias en el texto
                             coincidencias = re.finditer(patron, contenido)
 
-                            # Almacenar los índices de las ocurrencias de "R" en una lista
-                            indices_r = [coincidencia.start() for coincidencia in coincidencias]
+                            fechas_lecturas = [coincidencia.group(1) for coincidencia in coincidencias]
 
-                            # Imprimir los índices de las ocurrencias de "R"
-                            #print("Índices de 'R':", indices_r)
+                            print("Fechas encontradas:", fechas_lecturas)
+
                             try:
-                                inicioI = indices_r[0]
-                                inicioF = indices_r[1]
-                                indiceDesde = contenido[inicioI -10 : inicioI]
-                                indiceHasta = contenido[inicioF - 10 : inicioF]
-                            except:
+                                indiceDesde = fechas_lecturas[0]
+                                indiceHasta = fechas_lecturas[1]
+
+                                print("INDICE DESDE:", indiceDesde)
+                                print("INDICE HASTA:", indiceHasta)
+
+                            except IndexError:
+                                indiceDesde = ""
+                                indiceHasta = ""
+                                print("No se encontraron las dos fechas de lectura")
+
                                 try:
                                     inicioF = indices_r[0]
                                     iniciaEncontrarA = contenido[indices_r[0]-50 : inicioF+2]
@@ -330,5 +335,5 @@ def estampado(numero_bot):
                 pass
             print("PROCESO TERMINADO")
         pass
-#numero_bot = "bot_02" 
-#estampado(numero_bot)    
+numero_bot = "bot_04" 
+estampado(numero_bot)   
