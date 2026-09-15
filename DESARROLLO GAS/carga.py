@@ -309,7 +309,8 @@ def carga():
             #vincular_gas = driver.find_element(By.XPATH,'//*[@id="cdk-accordion-child-0"]/div/div/div[2]/a/div/span')
             #vincular_gas.click()
             #xpath_v_s = '/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav/div/sdl-sidebar/div/mat-nav-list[3]/mat-expansion-panel/div/div/div/div[4]/a/div/span'
-            xpath_v_s = '/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav/div/sdl-sidebar/div/mat-nav-list[2]/mat-expansion-panel/div/div/div/div[6]/a/div/span'
+            #xpath_v_s = '/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav/div/sdl-sidebar/div/mat-nav-list[2]/mat-expansion-panel/div/div/div/div[6]/a/div/span'
+            xpath_v_s = '/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav/div/sdl-sidebar/div/mat-nav-list[2]/mat-expansion-panel/div/div/div/div[5]/a/div/span'
             WebDriverWait(driver, 200).until(EC.presence_of_element_located((By.XPATH,xpath_v_s)))
             vincular_suministro = driver.find_element(By.XPATH,xpath_v_s)
             vincular_suministro.click()
