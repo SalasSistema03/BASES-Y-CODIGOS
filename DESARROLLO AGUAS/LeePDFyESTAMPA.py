@@ -167,6 +167,7 @@ def estampado (numero_bot):
         punto = servicio[2]
         adm = servicio[3]
         id_casa = servicio[4]
+        punto = str(int(punto))
         #SE DETERMINAN LAS VARIABLES PARA LA INTRODUCCION DEL CODIGO DE BARRAS
         inputfile = rute_agua + "DESCARGA/" + punto + ".pdf"
         #print(inputfile)
@@ -188,7 +189,7 @@ def estampado (numero_bot):
                     mes = cod [21:23]
                     año = cod [23:25]
                     fecha = dia+"-"+mes+"-"+año
-                    monto = cod [26:36]
+                    monto = cod [26:40]
                     total = int(monto)
                     mont = str(total).zfill(10)
                     if int(mes) == 12:
@@ -199,7 +200,7 @@ def estampado (numero_bot):
                         mes2 = cod2 [21:23]
                         año2 = cod2 [23:25]
                         fecha2 = dia2+"-"+mes2+"-"+año2
-                        monto2 = cod2 [26:36]
+                        monto2 = cod2 [26:40]
                         total2 = int(monto)
                         mont2 = str(monto2).zfill(10)
                         #print("toma el valor mas")
@@ -213,7 +214,7 @@ def estampado (numero_bot):
                             mes2 = cod2 [21:23]
                             año2 = cod2 [23:25]
                             fecha2 = dia2+"-"+mes2+"-"+año2
-                            monto2 = cod2 [26:36]
+                            monto2 = cod2 [26:40]
                             total2 = int(monto2)
                             mont2 = str(monto2).zfill(10)
                         except:
@@ -344,5 +345,5 @@ def estampado (numero_bot):
                 pass
             print("PROCESO TERMINADO")
         pass
-""" numero_bot = "Bot_01"
+""" numero_bot = "Bot_03"
 estampado(numero_bot) """
