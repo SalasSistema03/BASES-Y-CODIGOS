@@ -2,7 +2,6 @@
 from datetime import datetime
 from os import mkdir
 import shutil
-
 #rute = 'C:/PROGRAMAS/'
 rute = '//10.10.10.171/Compartida/'
 rute_txt = rute + "IMPUESTOS/GAS/TXT/"
@@ -54,5 +53,6 @@ def ordenar(numero_bot):
         except:
             pass
     print('DONE')
+
 
 #ordenar()

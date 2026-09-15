@@ -154,3 +154,5 @@ def estampado ():
                 pass
             print("PROCESO TERMINADO")
         pass
+
+estampado ()
