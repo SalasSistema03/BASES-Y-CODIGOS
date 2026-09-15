@@ -139,17 +139,17 @@ def aplicacion1():
 
 
             time.sleep(8)
-
-            pyautogui.press('tab', presses=12,interval=0.20)
+            pyautogui.press('tab', presses=12, interval=0.20)
             time.sleep(2)
+
             
             for _ in range(3):
-                pyautogui.hotkey('shift', 'tab')
-            pyautogui.press("enter")
-            time.sleep(2) 
-            pyautogui.press("enter")
+                pyautogui.hotkey('shift','tab')
+            pyautogui.press('enter')
+            time.sleep(2)
+            pyautogui.press('enter')
             time.sleep(5)
-
+            
             #escribe nombre de archivo
             descargaEn = directorio_descarga+ "/" + folio + "_" + padron + ".pdf"
             print(descargaEn.replace("/", "\\"))

@@ -17,6 +17,7 @@ rute = '//10.10.10.171/Compartida/'
 rute_txt = rute + "IMPUESTOS/GAS/TXT/"
 now = datetime.now()
 fecha = str(now.year) + "-" + str(now.month).zfill(2) + "-" + str(now.day).zfill(2)
+URL_HOME = "https://www.litoralgas.com.ar/ov/site/home"
 
 def descarga(completable1, numero_bot):
     options = webdriver.ChromeOptions()
@@ -55,71 +56,83 @@ def descarga(completable1, numero_bot):
         boton_salir.click()
         time.sleep(10)
 
-    def cambio_cuenta (c_mail):
-        try: 
-
-            time.sleep(2)
+    def cambio_cuenta(c_mail):
+        url_esperada = "https://www.litoralgas.com.ar/ov/site/home"
+        max_intentos = 3  # Puedes ajustar los reintentos máximos si lo deseas
+        intento = 0
+        
+        while intento < max_intentos:
             try:
-                cierra_sesion()
+                time.sleep(2)
+                try:
+                    cierra_sesion()
+                except:
+                    pass
+                    
+                driver.get(gas_principal)
+                xpath_oficina = "/html/body/div[3]/div/section/div/div/div[1]/div/div/div/p[1]/a/img"
+                WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, xpath_oficina)))  
+                oficina = driver.find_element(By.XPATH, xpath_oficina)
+                oficina.click()
+                
+                handles = driver.window_handles
+                if len(handles) > 1:
+                    driver.switch_to.window(handles[0])  
+                    driver.close()  
+                driver.switch_to.window(handles[-1])
+                
             except:
                 pass
-            driver.get(gas_principal)
-            xpath_oficina = "/html/body/div[3]/div/section/div/div/div[1]/div/div/div/p[1]/a/img"
-            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH,xpath_oficina)))   
-            oficina = driver.find_element(By.XPATH,xpath_oficina)
-            oficina.click()
-            handles = driver.window_handles
-            # Cierra la primera ventana (si hay más de una ventana abierta)
-            if len(handles) > 1:
-                driver.switch_to.window(handles[0])  # Cambia el foco a la primera ventana
-                driver.close()  # Cierra la primera ventana
-            driver.switch_to.window(handles[-1])
-        except:
-            pass
-        try:
-            #deteccion y estampado de usuario, contraseña y apreta un enter
-            mail_cuenta = '/html/body/app-root/div/app-login-page/div[2]/div[1]/div[1]/mat-card/form/mat-card-content/sdl-input/form/mat-form-field/div/div[1]/div[1]/input'
-            WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH,mail_cuenta)))
-            insert_cuenta = driver.find_element(By.XPATH,mail_cuenta)
-            WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH,"//input[@id='mat-input-1']")))
-            insert_cuenta.send_keys(c_mail)
-            time.sleep(1)
-            insert_contraseña = driver.find_element(By.XPATH,"//input[@id='mat-input-1']")
-            insert_contraseña.send_keys("salas3108")
-            time.sleep(3)
-            insert_contraseña.send_keys(Keys.ENTER)
-            time.sleep(2)
-            driver.refresh()
-            """ print("pasa aca")
-            time.sleep(10) """
-        except:
+
             try:
-                driver.refresh()
-                #deteccion y estampado de usuario, contraseña y apreta un enter
+                # Proceso de login (Primer bloque)
                 mail_cuenta = '/html/body/app-root/div/app-login-page/div[2]/div[1]/div[1]/mat-card/form/mat-card-content/sdl-input/form/mat-form-field/div/div[1]/div[1]/input'
-                WebDriverWait(driver, 45).until(EC.presence_of_element_located((By.XPATH,mail_cuenta)))
-                insert_cuenta = driver.find_element(By.XPATH,mail_cuenta)
-                mail = "/html/body/app-root/div/app-login-page/div[2]/div[1]/div[1]/mat-card/form/mat-card-content/sdl-input/form/mat-form-field/div/div[1]/div"
-                #WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH,"//input[@id='mat-input-1']")))
-                WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH,mail)))
+                WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, mail_cuenta)))
+                insert_cuenta = driver.find_element(By.XPATH, mail_cuenta)
+                
+                WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//input[@id='mat-input-1']")))
                 insert_cuenta.send_keys(c_mail)
                 time.sleep(1)
-                contrasenia = "/html/body/app-root/div/app-login-page/div[2]/div[1]/div[1]/mat-card/form/mat-card-content/sdl-password-input/form/mat-form-field/div/div[1]/div[1]"
-                insert_contraseña = driver.find_element(By.XPATH,contrasenia)
-                #insert_contraseña = driver.find_element(By.XPATH,"//input[@id='mat-input-1']")
+                
+                insert_contraseña = driver.find_element(By.XPATH, "//input[@id='mat-input-1']")
                 insert_contraseña.send_keys("salas3108")
-                time.sleep(3)
-                insert_contraseña.send_keys(Keys.ENTER)
                 time.sleep(2)
-                #driver.refresh()
-                """ print("pasa aca")
-                time.sleep(10) """
+                insert_contraseña.send_keys(Keys.ENTER)
+                
             except:
-                pass
-            pass
-            #
-        
+                try:
+                    # Proceso de login alternativo (Segundo bloque)
+                    driver.refresh()
+                    mail_cuenta = '/html/body/app-root/div/app-login-page/div[2]/div[1]/div[1]/mat-card/form/mat-card-content/sdl-input/form/mat-form-field/div/div[1]/div[1]/input'
+                    WebDriverWait(driver, 45).until(EC.presence_of_element_located((By.XPATH, mail_cuenta)))
+                    insert_cuenta = driver.find_element(By.XPATH, mail_cuenta)
+                    
+                    mail = "/html/body/app-root/div/app-login-page/div[2]/div[1]/div[1]/mat-card/form/mat-card-content/sdl-input/form/mat-form-field/div/div[1]/div"
+                    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, mail)))
+                    insert_cuenta.send_keys(c_mail)
+                    time.sleep(1)
+                    
+                    contrasenia = "/html/body/app-root/div/app-login-page/div[2]/div[1]/div[1]/mat-card/form/mat-card-content/sdl-password-input/form/mat-form-field/div/div[1]/div[1]"
+                    insert_contraseña = driver.find_element(By.XPATH, contrasenia)
+                    insert_contraseña.send_keys("salas3108")
+                    time.sleep(2)
+                    insert_contraseña.send_keys(Keys.ENTER)
+                except:
+                    pass
 
+            # --- VALIDACIÓN DE URL Y REINTENTO ---
+            try:
+                # Esperamos 10 segundos para ver si la URL cambia a la esperada
+                WebDriverWait(driver, 10).until(EC.url_to_be(url_esperada))
+                print(("Login exitoso en la cuenta: " + c_mail))
+                break  # Si llegó a la página correcta, rompe el ciclo y termina
+            except:
+                intento += 1
+                print(f"Intento {intento} fallido. Reintentando login para {c_mail}...")
+                if intento >= max_intentos:
+                    print("Se superaron los intentos máximos de inicio de sesión.")
+
+   
     def cambioCuenta (folio, variable_range, gmail_1, gmail_2, gmail_3, gmail_4, gmail_5, gmail_6, gmail_7):
         #print(variable_range)
         if int(folio) in range(1,501):
