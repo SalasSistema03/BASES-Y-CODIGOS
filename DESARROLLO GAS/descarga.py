@@ -15,6 +15,8 @@ import pyautogui
 #rute = 'C:/PROGRAMAS/'
 rute = '//10.10.10.171/Compartida/'
 rute_txt = rute + "IMPUESTOS/GAS/TXT/"
+archivo_repetidas = rute_txt + "LISTADOREPETIDAS.txt"
+fecha_repetida = "01/10/2026"
 now = datetime.now()
 fecha = str(now.year) + "-" + str(now.month).zfill(2) + "-" + str(now.day).zfill(2)
 URL_HOME = "https://www.litoralgas.com.ar/ov/site/home"
@@ -34,6 +36,15 @@ def descarga(completable1, numero_bot):
     #gas_principal = "https://www.litoralgas.com.ar/site/noticias/comunicaciones/oficina-virtual/"
     gas_principal = "https://www.litoralgas.com.ar/ov/login"
     padron_gas = rute_txt + "descarga_" + numero_bot + ".txt"
+    try:
+        with open(archivo_repetidas, "r", encoding="utf-8") as archivo:
+            folios_repetidos = {
+                linea.split()[0].lstrip("0") or "0"
+                for linea in archivo
+                if linea.split() and not linea.lstrip().startswith("#")
+            }
+    except FileNotFoundError:
+        folios_repetidos = set()
     contador = 0
     #--------------------------------------------------------- logueos por cuenta
     gmail_1 = 'adm.impuestos.1@gmail.com' #clave mail admin3108 #clave web salas3108
@@ -285,6 +296,29 @@ def descarga(completable1, numero_bot):
                 num_periodo = completable1
                 print('periodo '+ str(num_periodo))
                 if numero_periodo == num_periodo:
+                    folio_normalizado = folio.lstrip("0") or "0"
+                    factura_normalizada = numero_factura.lstrip("0") or "0"
+                    es_repetida = (
+                        fecha_repetida in periodo and
+                        (folio_normalizado in folios_repetidos or
+                         factura_normalizada in folios_repetidos)
+                    )
+                    if es_repetida:
+                        print('REPETIDA omitida - Folio ' + folio +
+                              ' Factura ' + numero_factura +
+                              ' Fecha ' + fecha_repetida)
+                        with open(rute + 'IMPUESTOS/GAS/' +
+                                  "REPETIDAS " + fecha + "_" +
+                                  str(numero_bot) + ".txt", "a") as file:
+                            file.write(folio + " " + numero_factura + " " +
+                                       cliente + " " + persona + " " +
+                                       periodo + "\n")
+                        contador += 1
+                        pyautogui.press('esc')
+                        print('Procesados ' + str(contador) + '/' +
+                              str(contador_total) + ' - Folio ' + str(folio))
+                        driver.get('https://www.litoralgas.com.ar/ov/site/home')
+                        continue
                     #credito_xpath = "/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[6]/mdt-table-cell/mdt-text-cell/span"
                     credito_xpath = "/html/body/app-root/div/sdl-menu/div/mat-sidenav-container/mat-sidenav-content/div/div[1]/app-mis-facturas/div/div[2]/div[2]/mat-card/mat-card-content/div/sdl-table/table/tbody/tr[1]/td[6]"
                     credito = driver.find_element(By.XPATH,credito_xpath).text
