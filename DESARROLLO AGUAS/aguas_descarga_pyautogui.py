@@ -1,6 +1,7 @@
+import pyautogui
 import time
 import pyperclip
-numero_bot = "02"
+numero_bot = "01"
 """ fecha de hoy mes """
 factura_mes = ""
 mes_actual = time.strftime("%m")
@@ -142,13 +143,15 @@ for servicio in listado:
         pyautogui.write('Pagar')
         time.sleep(0.5)
         pyautogui.press('enter')
-        time.sleep(0.5)
+        time.sleep(1)
+        pyautogui.press('enter')
+        time.sleep(1)
        # pyautogui.press('enter')
        # time.sleep(0.5)
         pyautogui.press('esc')
-        time.sleep(0.5)
+        time.sleep(1)
         pyautogui.hotkey('shift','tab')
-        time.sleep(0.5)
+        time.sleep(1)
         pyautogui.press('enter')
 
         #pyautogui.hotkey('ctrl', 'l')

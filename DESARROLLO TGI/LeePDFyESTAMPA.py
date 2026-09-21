@@ -6,13 +6,18 @@ from os import mkdir
 from CREADOR import create_pdf
 import os
 from conexion import conectar
+import sys
+base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if base_dir not in sys.path:
+    sys.path.insert(0, base_dir)
+from bot import nombrebot
 
 #rute = 'C:/PROGRAMAS/'
 rute = '//10.10.10.171/Compartida/'
 rute_txt = rute + "IMPUESTOS/TGI/TXT/"
 rute_tgi = rute + "IMPUESTOS/TGI/"
 logo = rute + "IMPUESTOS/TGI/AUXILIARES/logo.jpg"
-
+numero_bot = nombrebot()
 now = datetime.now()
 fecha_txt = str(now.day).zfill(2) + "-" + str(now.month).zfill(2) + "-" + str(now.year)
 #print(fecha_txt)    
@@ -189,5 +194,6 @@ def estampado (numero_bot):
             print("PROCESO TERMINADO")
         pass
 
-numero_bot = "Bot_04"
+#estampado (numero_bot)
+numero_bot = "Bot_01"
 estampado (numero_bot) 

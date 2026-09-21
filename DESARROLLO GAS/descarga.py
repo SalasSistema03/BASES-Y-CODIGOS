@@ -387,6 +387,7 @@ def descarga(completable1, numero_bot):
             with open(rute + 'IMPUESTOS/GAS/' + "NO ENCONTRADOS " + fecha + "_" + numero_bot + ".txt", "a") as file:
                 file.write(folio_no_encontrado)
         contador += 1
+        """ apretar escape con pyautogui """
         pyautogui.press('esc')
         print('Procesados ' + str(contador) + '/' + str(contador_total) + ' - Folio ' + str(folio))
         driver.get('https://www.litoralgas.com.ar/ov/site/home')
